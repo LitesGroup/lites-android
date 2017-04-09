@@ -1,0 +1,26 @@
+general:
+    artifacts:
+        - /home/ubuntu/lites-android/app/build/outputs/apk/
+
+machine:
+    environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-25,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+    - echo y | android update sdk --no-ui --all --filter build-tools-25.2.3
+    - echo y | android update sdk --no-ui --all --filter extra-android-m2repository
+    - echo y | /usr/local/android-sdk-linux/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.0-alpha8"
+    - echo y | /usr/local/android-sdk-linux/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.0-alpha8"
+    - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
+
+  cache_directories:
+    - /usr/local/android-sdk-linux/platforms/android-25
+    - /usr/local/android-sdk-linux/build-tools/25.0.0
+    - /usr/local/android-sdk-linux/extras/android/m2repository
+
+test:
+    override:
+        - (./gradlew assembleRelease):
+timeout: 360
