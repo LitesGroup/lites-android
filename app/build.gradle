@@ -28,8 +28,14 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     compile 'com.android.support:support-annotations:24.2.0'
     compile 'com.intellij:annotations:12.0'
-    compile 'com.facebook.stetho:stetho:1.4.2'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     compile 'com.google.dagger:dagger:2.10'
+
+    // Networking
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.7.0'
+
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
     provided 'javax.annotation:jsr250-api:1.0'

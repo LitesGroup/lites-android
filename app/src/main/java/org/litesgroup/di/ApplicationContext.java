@@ -1,4 +1,4 @@
-package org.litesgroup.org.litesgroup.di;
+package org.litesgroup.di;
 
 import javax.inject.Qualifier;
 
