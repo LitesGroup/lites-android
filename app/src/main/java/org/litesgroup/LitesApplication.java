@@ -6,6 +6,7 @@ import android.content.Context;
 import com.facebook.stetho.Stetho;
 
 import org.jetbrains.annotations.NotNull;
+import org.litesgroup.network.NetworkModule;
 
 public class LitesApplication extends Application {
     private LitesApplicationComponent mLitesApplicationComponent;
@@ -16,6 +17,7 @@ public class LitesApplication extends Application {
         Stetho.initializeWithDefaults(this);
         mLitesApplicationComponent = DaggerLitesApplicationComponent.builder()
                 .androidApplicationModule(new AndroidApplicationModule(this))
+                .networkModule(new NetworkModule())
                 .build();
     }
 

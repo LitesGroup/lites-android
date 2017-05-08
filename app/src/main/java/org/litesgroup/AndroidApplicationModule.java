@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import org.jetbrains.annotations.NotNull;
-import org.litesgroup.org.litesgroup.di.ApplicationContext;
+import org.litesgroup.di.ApplicationContext;
 
 import dagger.Module;
 import dagger.Provides;
