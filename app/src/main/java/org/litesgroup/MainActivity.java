@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+import org.litesgroup.app.model.Movie;
+import org.litesgroup.app.service.EchoClient;
 
 import java.io.IOException;
 
@@ -22,6 +24,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import rx.Observable;
+import rx.Subscriber;
 
 public class MainActivity extends BaseActivity {
     public static final MediaType MEDIA_TYPE_MARKDOWN
@@ -36,6 +40,7 @@ public class MainActivity extends BaseActivity {
 
     @Inject Application mApplication;
     @Inject OkHttpClient mOkHttpClient;
+    @Inject EchoClient mEchoClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,10 @@ public class MainActivity extends BaseActivity {
         networkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                runDummyNetworkRequest();
+                // TODO: Remove these methods and make samples
+//                runDummyNetworkRequestUsingOkhttp();
+                runDummyNetworkRequestUsingRetrofit();
+//                runDummyNetworkRequestUsingRetrofitCall();
             }
         });
     }
@@ -66,7 +74,50 @@ public class MainActivity extends BaseActivity {
         Toast.makeText(this, "testing dependency injection", Toast.LENGTH_LONG).show();
     }
 
-    private void runDummyNetworkRequest() {
+    private void runDummyNetworkRequestUsingRetrofit() {
+        final Movie movie = new Movie("12", "Armageddon", 1991);
+        Observable<Movie> movieObservable = mEchoClient.getEcho(movie);
+        movieObservable
+                .subscribe(new Subscriber<Movie>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Movie movie) {
+                TextView textView = (TextView) findViewById(R.id.text);
+                textView.setText(movie.getId() + " " + movie.getTitle() + " " + movie.getYear());
+            }
+        });
+    }
+
+    private void runDummyNetworkRequestUsingRetrofitCall() {
+        final Movie movie = new Movie("12", "Armageddon", 1991);
+        retrofit2.Call<Movie> call = mEchoClient.getEchoUsingCall(movie);
+        call.enqueue(new retrofit2.Callback<Movie>() {
+            @Override
+            public void onResponse(retrofit2.Call<Movie> call, retrofit2.Response<Movie> response) {
+                if(response.isSuccessful()) {
+                    final Movie responseMovie = response.body();
+                    TextView textView = (TextView) findViewById(R.id.text);
+                    textView.setText(responseMovie.getId() + " " + responseMovie.getTitle() + " " + responseMovie.getYear());
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<Movie> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void runDummyNetworkRequestUsingOkhttp() {
         @NotNull Request request = new Request.Builder()
                 .url("http://dev.litesgroup.org/echo")
                 .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, mEditText.getText().toString()))
