@@ -39,7 +39,7 @@ dependencies {
     compile 'com.google.dagger:dagger:2.10'
 
     // Debugging tools
-    debugCompile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
     // Networking
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
