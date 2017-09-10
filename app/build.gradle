@@ -32,6 +32,9 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     compile 'com.intellij:annotations:12.0'
 
+    // Material Design Lib
+    compile 'com.android.support:design:25.4.0'
+
     // Dependency Injection
     compile 'com.google.dagger:dagger:2.10'
 
