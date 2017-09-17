@@ -2,6 +2,10 @@ package org.litesgroup;
 
 import android.app.Application;
 
+import org.litesgroup.LitesApplication;
+import org.litesgroup.MainActivity;
+import org.litesgroup.app.service.EchoClient;
+import org.litesgroup.di.AllApplicationProviders;
 import org.litesgroup.network.NetworkModule;
 
 import javax.inject.Singleton;
@@ -11,14 +15,14 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 @Singleton
-@Component(modules = {AndroidApplicationModule.class, NetworkModule.class})
+@Component(modules = {AllApplicationProviders.class})
 public interface LitesApplicationComponent {
-    // remove injection methods if downstream modules will perform injection
-    public abstract void inject(MainActivity activity);
+    void inject(LitesApplication application);
 
     Application application();
-    // TODO Can be removed?
     OkHttpClient okHttpClient();
-    // TODO Can be removed?
     Retrofit getRetrofit();
+
+    // Should be moved to its own dagger component
+    EchoClient getEchoClient();
 }
