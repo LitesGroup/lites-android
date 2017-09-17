@@ -1,4 +1,4 @@
-package org.litesgroup;
+package org.litesgroup.di;
 
 import android.app.Application;
 import android.content.Context;
@@ -14,7 +14,7 @@ import dagger.Provides;
 public class AndroidApplicationModule {
     @NotNull private final Application mApplication;
 
-    public AndroidApplicationModule(Application application) {
+    public AndroidApplicationModule(@NotNull Application application) {
         mApplication = application;
     }
 

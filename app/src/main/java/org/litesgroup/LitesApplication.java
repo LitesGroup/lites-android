@@ -1,22 +1,28 @@
 package org.litesgroup;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.facebook.stetho.Stetho;
 
 import org.jetbrains.annotations.NotNull;
+import org.litesgroup.di.AndroidApplicationModule;
 import org.litesgroup.network.LitesApi;
 import org.litesgroup.network.NetworkModule;
 
-public class LitesApplication extends Application {
+public class LitesApplication extends BaseApplication {
     private LitesApplicationComponent mLitesApplicationComponent;
 
     @Override
     public void onCreate() {
-        super.onCreate();
         Stetho.initializeWithDefaults(this);
-        mLitesApplicationComponent = DaggerLitesApplicationComponent.builder()
+        mLitesApplicationComponent = onCreateApplicationComponent();
+        super.onCreate();
+    }
+
+    @NotNull
+    @Override
+    protected LitesApplicationComponent onCreateApplicationComponent() {
+        return DaggerLitesApplicationComponent.builder()
                 .androidApplicationModule(new AndroidApplicationModule(this))
                 .networkModule(new NetworkModule(LitesApi.BASE_URL))
                 .build();
@@ -28,5 +34,10 @@ public class LitesApplication extends Application {
 
     public static LitesApplicationComponent getAppComponent(@NotNull Context context) {
         return get(context).mLitesApplicationComponent;
+    }
+
+    @Override
+    protected void inject() {
+        mLitesApplicationComponent.inject(this);
     }
 }

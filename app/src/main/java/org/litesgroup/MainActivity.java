@@ -11,6 +11,7 @@ import android.widget.Toast;
 import org.jetbrains.annotations.NotNull;
 import org.litesgroup.app.model.Movie;
 import org.litesgroup.app.service.EchoClient;
+import org.litesgroup.di.LitesComponent;
 
 import java.io.IOException;
 
@@ -64,8 +65,18 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @NotNull
     @Override
-    public void inject(LitesApplicationComponent component) {
+    protected LitesComponent onCreateComponent() {
+        return DaggerMainActivityComponent.builder()
+                .litesApplicationComponent(LitesApplication.getAppComponent(this))
+                .build();
+    }
+
+    @Override
+    protected void onComponentCreated() {
+        super.onComponentCreated();
+        final MainActivityComponent component = getComponent();
         component.inject(this);
     }
 
