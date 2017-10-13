@@ -33,7 +33,7 @@ dependencies {
     compile 'com.intellij:annotations:12.0'
 
     // Material Design Lib
-    compile 'com.android.support:design:25.4.0'
+    compile 'com.android.support:design:25.3.1'
 
     // Dependency Injection
     compile 'com.google.dagger:dagger:2.10'
