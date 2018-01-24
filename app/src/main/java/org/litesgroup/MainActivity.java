@@ -8,6 +8,7 @@ import android.widget.Button;
 import org.jetbrains.annotations.NotNull;
 import org.litesgroup.di.LitesComponent;
 import org.litesgroup.playground.PlaygroundActivity;
+import org.litesgroup.playground.RxJavaPlaygroundActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -16,10 +17,18 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final Button playgroundButton = (Button) findViewById(R.id.playground_button);
+        final Button rxPlaygroundButton = (Button) findViewById(R.id.rx_playground_button);
         playgroundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(MainActivity.this, PlaygroundActivity.class);
+                startActivity(intent);
+            }
+        });
+        rxPlaygroundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(MainActivity.this, RxJavaPlaygroundActivity.class);
                 startActivity(intent);
             }
         });

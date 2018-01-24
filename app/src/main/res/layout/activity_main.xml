@@ -13,4 +13,12 @@
         android:layout_gravity="center"
         android:id="@+id/playground_button"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rx_playground_activity"
+        android:layout_gravity="center"
+        android:id="@+id/rx_playground_button"/>
+
+
 </LinearLayout>
