@@ -2,4 +2,6 @@
     <string name="app_name">lites-android</string>
     <!-- Playground Activity -->
     <string name="playground_activity">Playground Activity</string>
+    <string name="rx_playground_activity">RxPlayground Activity</string>
+    <string name="title_activity_rx_java_playground">RxJavaPlaygroundActivity</string>
 </resources>
