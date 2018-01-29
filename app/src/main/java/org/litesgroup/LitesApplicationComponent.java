@@ -2,11 +2,8 @@ package org.litesgroup;
 
 import android.app.Application;
 
-import org.litesgroup.LitesApplication;
-import org.litesgroup.MainActivity;
 import org.litesgroup.app.service.EchoClient;
 import org.litesgroup.di.AllApplicationProviders;
-import org.litesgroup.network.NetworkModule;
 
 import javax.inject.Singleton;
 
@@ -22,6 +19,7 @@ public interface LitesApplicationComponent {
     Application application();
     OkHttpClient okHttpClient();
     Retrofit getRetrofit();
+    AppDatabase getAppDatabase();
 
     // Should be moved to its own dagger component
     EchoClient getEchoClient();

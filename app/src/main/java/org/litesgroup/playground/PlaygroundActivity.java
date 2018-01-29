@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+import org.litesgroup.AppDatabase;
 import org.litesgroup.BaseActivity;
 import org.litesgroup.LitesApplication;
 import org.litesgroup.R;
@@ -27,8 +28,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import rx.Completable;
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class PlaygroundActivity extends BaseActivity{
 
@@ -42,12 +46,10 @@ public class PlaygroundActivity extends BaseActivity{
 
     private EditText mEditText;
 
-    @Inject
-    Application mApplication;
-    @Inject
-    OkHttpClient mOkHttpClient;
-    @Inject
-    EchoClient mEchoClient;
+    @Inject Application mApplication;
+    @Inject OkHttpClient mOkHttpClient;
+    @Inject EchoClient mEchoClient;
+    @Inject AppDatabase mAppDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,21 @@ public class PlaygroundActivity extends BaseActivity{
 //                runDummyNetworkRequestUsingOkhttp();
                 runDummyNetworkRequestUsingRetrofit();
 //                runDummyNetworkRequestUsingRetrofitCall();
+            }
+        });
+
+        Button dbButton = (Button) findViewById(R.id.database_button);
+        networkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // inserting a movie into the database
+                final Movie movie = new Movie("1", "Big Littel Lie", 2018);
+                Completable.fromAction(() -> {
+                    mAppDb.getMovieDao().inserMovie(movie);
+                })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe();
             }
         });
     }
