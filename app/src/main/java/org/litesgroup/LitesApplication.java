@@ -5,6 +5,7 @@ import android.content.Context;
 import com.facebook.stetho.Stetho;
 
 import org.jetbrains.annotations.NotNull;
+import org.litesgroup.database.DatabaseModule;
 import org.litesgroup.di.AndroidApplicationModule;
 import org.litesgroup.network.LitesApi;
 import org.litesgroup.network.NetworkModule;
@@ -25,6 +26,7 @@ public class LitesApplication extends BaseApplication {
         return DaggerLitesApplicationComponent.builder()
                 .androidApplicationModule(new AndroidApplicationModule(this))
                 .networkModule(new NetworkModule(LitesApi.BASE_URL))
+                .databaseModule(new DatabaseModule())
                 .build();
     }
 
