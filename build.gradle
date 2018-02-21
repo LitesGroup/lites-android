@@ -26,5 +26,7 @@ task clean(type: Delete) {
 }
 
 ext {
+    // Library Versions
     roomVersion = '1.0.0-alpha4'
+    rxjava2Version = '2.1.1'
 }
