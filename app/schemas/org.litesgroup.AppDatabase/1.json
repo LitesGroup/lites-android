@@ -2,26 +2,29 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9a90ed08d3261f5fcb15ea820ff576b8",
+    "identityHash": "fea227500d29ccbec0febcf179f540c5",
     "entities": [
       {
         "tableName": "movie",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`movieId` TEXT, `title` TEXT, `year` INTEGER, PRIMARY KEY(`movieId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`movieId` TEXT NOT NULL, `title` TEXT NOT NULL, `year` INTEGER NOT NULL, PRIMARY KEY(`movieId`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "movieId",
-            "affinity": "TEXT"
+            "affinity": "TEXT",
+            "notNull": true
           },
           {
             "fieldPath": "title",
             "columnName": "title",
-            "affinity": "TEXT"
+            "affinity": "TEXT",
+            "notNull": true
           },
           {
             "fieldPath": "year",
             "columnName": "year",
-            "affinity": "INTEGER"
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -36,7 +39,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9a90ed08d3261f5fcb15ea820ff576b8\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fea227500d29ccbec0febcf179f540c5\")"
     ]
   }
 }
