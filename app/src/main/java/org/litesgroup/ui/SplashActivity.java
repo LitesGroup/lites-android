@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import org.litesgroup.BaseActivity;
-import org.litesgroup.playground.PlaygroundActivity;
+import org.litesgroup.MainActivity;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -18,7 +18,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Start home activity
-        startActivity(new Intent(SplashActivity.this, PlaygroundActivity.class));
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
         // close splash activity
         finish();    }
 }

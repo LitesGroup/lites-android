@@ -34,7 +34,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class PlaygroundActivity extends BaseActivity{
+public class PlaygroundActivity extends BaseActivity {
 
     public static final MediaType MEDIA_TYPE_MARKDOWN
             = MediaType.parse("application/json; charset=utf-8");
